@@ -1,5 +1,9 @@
 name: Marktbreite
 on:
+  push:
+    paths:
+      - "breadth.py"
+      - ".github/workflows/breadth.yml"
   workflow_dispatch:
   schedule:
     - cron: "30 22 * * 1-5"
