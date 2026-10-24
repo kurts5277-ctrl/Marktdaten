@@ -6,12 +6,26 @@ UA = {"User-Agent": "Mozilla/5.0 (stress)"}
 
 
 def fred(sid):
-    r = requests.get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}", headers=UA, timeout=30)
-    r.raise_for_status()
-    df = pd.read_csv(io.StringIO(r.text))
-    s = pd.to_numeric(df.iloc[:, 1], errors="coerce")
-    s.index = pd.to_datetime(df.iloc[:, 0])
-    return s.dropna()
+    err = ""
+    try:
+        r = requests.get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}", headers=UA, timeout=30)
+        r.raise_for_status()
+        df = pd.read_csv(io.StringIO(r.text))
+        s = pd.to_numeric(df.iloc[:, 1], errors="coerce")
+        s.index = pd.to_datetime(df.iloc[:, 0])
+        return s.dropna()
+    except Exception as e:
+        err = type(e).__name__ + " " + str(e)[:60]
+    key = os.environ.get("FRED_API_KEY")
+    if not key:
+        raise RuntimeError("CSV: " + err + " | kein FRED_API_KEY gesetzt")
+    r = requests.get("https://api.stlouisfed.org/fred/series/observations",
+                     params={"series_id": sid, "api_key": key, "file_type": "json", "sort_order": "desc", "limit": 20},
+                     headers=UA, timeout=30)
+    if r.status_code != 200:
+        raise RuntimeError(f"CSV: {err} | API: HTTP {r.status_code}")
+    obs = [o for o in r.json()["observations"] if o["value"] != "."]
+    return pd.Series({pd.to_datetime(o["date"]): float(o["value"]) for o in obs}).sort_index()
 
 
 def yahoo(sym):
@@ -62,7 +76,7 @@ def main():
             pts += row["stufe"]
             n += 1
         except Exception as e:
-            row.update({"wert": None, "stufe": None, "datum": None, "fehler": str(e)[:120]})
+            row.update({"wert": None, "stufe": None, "datum": None, "fehler": str(e)[:160]})
             print("FEHLER", name, e)
         out.append(row)
     score = round(pts / (2 * n) * 100, 1) if n else None
@@ -75,3 +89,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
