@@ -27,7 +27,7 @@
    "wert": null,
    "stufe": null,
    "datum": null,
-   "fehler": "HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=30)"
+   "fehler": "CSV: ReadTimeout HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): R | kein FRED_API_KEY gesetzt"
   },
   {
    "name": "Kreditspread Investment Grade",
@@ -37,7 +37,7 @@
    "wert": null,
    "stufe": null,
    "datum": null,
-   "fehler": "HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=30)"
+   "fehler": "CSV: ReadTimeout HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): R | kein FRED_API_KEY gesetzt"
   },
   {
    "name": "Zinskurve 10J minus 2J",
@@ -47,7 +47,7 @@
    "wert": null,
    "stufe": null,
    "datum": null,
-   "fehler": "HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=30)"
+   "fehler": "CSV: ReadTimeout HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): R | kein FRED_API_KEY gesetzt"
   },
   {
    "name": "Finanzstress-Index (St. Louis Fed)",
@@ -57,7 +57,7 @@
    "wert": null,
    "stufe": null,
    "datum": null,
-   "fehler": "HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=30)"
+   "fehler": "CSV: ReadTimeout HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): R | kein FRED_API_KEY gesetzt"
   },
   {
    "name": "S&P 500 Abstand zum 52-Wochen-Hoch",
@@ -71,5 +71,5 @@
  ],
  "geladen": 3,
  "gesamt": 7,
- "erzeugt_utc": "2026-10-24 14:07"
+ "erzeugt_utc": "2026-10-24 14:32"
 }
