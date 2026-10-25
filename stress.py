@@ -1,4 +1,4 @@
-"neu"""Markt-Stress-Indikatoren -> data/stress.json (Yahoo + FRED ohne Schlüssel)."""
+""Markt-Stress-Indikatoren -> data/stress.json (Yahoo + FRED ohne Schlüssel)."""
 import io, json, os, datetime as dt
 import pandas as pd, requests, yfinance as yf
 
