@@ -1,4 +1,4 @@
-""Markt-Stress-Indikatoren -> data/stress.json (Yahoo + FRED ohne Schlüssel)."""
+"""Markt-Stress-Indikatoren -> data/stress.json (Yahoo + FRED ohne Schlüssel)."""
 import io, json, os, datetime as dt
 import pandas as pd, requests, yfinance as yf
 
@@ -6,24 +6,14 @@ UA = {"User-Agent": "Mozilla/5.0 (stress)"}
 
 
 def fred(sid):
-    err = ""
-    try:
-        r = requests.get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}", headers=UA, timeout=30)
-        r.raise_for_status()
-        df = pd.read_csv(io.StringIO(r.text))
-        s = pd.to_numeric(df.iloc[:, 1], errors="coerce")
-        s.index = pd.to_datetime(df.iloc[:, 0])
-        return s.dropna()
-    except Exception as e:
-        err = type(e).__name__ + " " + str(e)[:60]
-    key = os.environ.get("FRED_API_KEY")
+    key = (os.environ.get("FRED_API_KEY") or "").strip()
     if not key:
-        raise RuntimeError("CSV: " + err + " | kein FRED_API_KEY gesetzt")
+        raise RuntimeError("FRED_API_KEY fehlt im Lauf (Secret wurde nicht uebergeben)")
     r = requests.get("https://api.stlouisfed.org/fred/series/observations",
                      params={"series_id": sid, "api_key": key, "file_type": "json", "sort_order": "desc", "limit": 20},
-                     headers=UA, timeout=30)
+                     headers=UA, timeout=20)
     if r.status_code != 200:
-        raise RuntimeError(f"CSV: {err} | API: HTTP {r.status_code}")
+        raise RuntimeError(f"FRED-API HTTP {r.status_code}")
     obs = [o for o in r.json()["observations"] if o["value"] != "."]
     return pd.Series({pd.to_datetime(o["date"]): float(o["value"]) for o in obs}).sort_index()
 
@@ -84,9 +74,16 @@ def main():
     json.dump({"score": score, "indikatoren": out, "geladen": n, "gesamt": len(IND),
                "erzeugt_utc": dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M")},
               open("data/stress.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    try:
+        hp = "data/stress_history.json"
+        hist = json.load(open(hp, encoding="utf-8")) if os.path.exists(hp) else []
+        today = dt.datetime.utcnow().strftime("%Y-%m-%d")
+        hist = [x for x in hist if x.get("date") != today] + [{"date": today, "score": score, "geladen": n}]
+        json.dump(hist[-400:], open(hp, "w", encoding="utf-8"), ensure_ascii=False)
+    except Exception as e:
+        print("Verlauf nicht gespeichert:", e)
     print("Stress-Score:", score, f"({n} von {len(IND)} Indikatoren)")
 
 
 if __name__ == "__main__":
     main()
-
