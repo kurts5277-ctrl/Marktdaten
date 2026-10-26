@@ -55,6 +55,88 @@ IND = [
 ]
 
 
+
+GRUPPEN = [
+    ("USA", True, [
+        ("^GSPC", "S&P 500", "Leitbarometer, Basis des S&P-Tech-ETFs und großer Teil des FTSE All-World."),
+        ("^NDX", "Nasdaq 100", "Tech-Schwergewichte, geben oft die Richtung für Tech-ETFs vor."),
+        ("^SOX", "Halbleiter (SOX)", "Chiphersteller als Taktgeber für Nasdaq und Tech."),
+        ("^DJI", "Dow Jones", "Alte Industrie- und Finanzwerte, zeigt die Breite abseits von Tech."),
+        ("^RUT", "Russell 2000", "Kleinwerte, Gradmesser für Risikobereitschaft und Zinssorgen.")]),
+    ("Europa", True, [
+        ("^STOXX", "Stoxx Europe 600", "Breites Europa, Heimat deiner Dividenden-ETFs."),
+        ("^STOXX50E", "Euro Stoxx 50", "Europäische Schwergewichte."),
+        ("^GDAXI", "DAX", "Deutschland, exportstark, reagiert früh auf Weltkonjunktur."),
+        ("^FTSE", "FTSE 100", "Großbritannien, rohstofflastig.")]),
+    ("Asien", True, [
+        ("^N225", "Nikkei 225", "Japan, großer Anteil im FTSE All-World, stark vom Yen beeinflusst."),
+        ("^KS11", "KOSPI (Südkorea)", "Speicherchips (u. a. Samsung, SK Hynix), Lieferkette für Tech und KI."),
+        ("^TWII", "Taiwan (TAIEX)", "TSMC, Herzstück der Chip-Lieferkette."),
+        ("^HSI", "Hang Seng", "China und Hongkong, Teil des FTSE All-World."),
+        ("^NSEI", "Nifty 50 (Indien)", "Wachsender Anteil in Welt-ETFs.")]),
+    ("Treiber", False, [
+        ("DX-Y.NYB", "US-Dollar-Index", "Starker Dollar belastet oft Aktien und Schwellenländer."),
+        ("^TNX", "US-10J-Rendite", "Steigende Zinsen drücken vor allem Tech-Bewertungen."),
+        ("EURUSD=X", "Euro/Dollar", "Wirkt direkt auf deine Euro-Rendite bei US-Aktien."),
+        ("USDJPY=X", "Dollar/Yen", "Ein schnell steigender Yen kann Verkäufe an den Märkten auslösen."),
+        ("CL=F", "Rohöl (WTI)", "Inflations- und Konjunkturbarometer."),
+        ("GC=F", "Gold", "Sicherer Hafen."),
+        ("HG=F", "Kupfer", "Konjunkturbarometer."),
+        ("BTC-USD", "Bitcoin", "Risikoappetit der Anleger.")]),
+]
+
+
+def index_stats(c, bp=False):
+    c = c.dropna()
+    last, prev = float(c.iloc[-1]), float(c.iloc[-2])
+    s50 = c.rolling(50).mean().iloc[-1]
+    s200 = c.rolling(200).mean().iloc[-1]
+    trend = None
+    if pd.notna(s200):
+        trend = "auf" if last > s50 > s200 else ("ab" if last < s50 < s200 else "gemischt")
+    d = c.diff()
+    g = d.clip(lower=0).ewm(alpha=1 / 14, adjust=False).mean().iloc[-1]
+    l = (-d.clip(upper=0)).ewm(alpha=1 / 14, adjust=False).mean().iloc[-1]
+    rsi = 100 - 100 / (1 + g / l) if l else 100.0
+    ch = lambda a, b: (a - b) * 100 if bp else (a / b - 1) * 100
+    return {"kurs": round(last, 2), "tag": round(ch(last, prev), 2), "trend": trend,
+            "abstand_hoch_pct": round((last / float(c.tail(252).max()) - 1) * 100, 1),
+            "rsi": round(float(rsi), 0),
+            "m1": round(ch(last, float(c.iloc[-22])), 1) if len(c) > 22 else None,
+            "datum": c.index[-1].strftime("%Y-%m-%d"), "einheit": "bp" if bp else "%"}
+
+
+def indices():
+    syms = [x[0] for g in GRUPPEN for x in g[2]]
+    cl = None
+    for _ in range(3):
+        try:
+            cl = yf.download(syms, period="2y", interval="1d", auto_adjust=True, progress=False, threads=True)["Close"]
+            break
+        except Exception as e:
+            print("Indizes-Download:", e)
+    out, cnt = [], {"auf": 0, "gemischt": 0, "ab": 0}
+    for name, rate, items in GRUPPEN:
+        rows = []
+        for sym, nm, why in items:
+            try:
+                st = index_stats(cl[sym], bp=(sym == "^TNX"))
+                if not rate:
+                    st["trend"] = None
+                elif st["trend"]:
+                    cnt[st["trend"]] += 1
+                st.update({"symbol": sym, "name": nm, "warum": why})
+                rows.append(st)
+            except Exception as e:
+                rows.append({"symbol": sym, "name": nm, "warum": why, "fehler": str(e)[:80]})
+                print("FEHLER", sym, e)
+        out.append({"name": name, "items": rows})
+    json.dump({"gruppen": out, "zusammenfassung": {**cnt, "gesamt": sum(cnt.values())},
+               "erzeugt_utc": dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M")},
+              open("data/indices.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print("Indizes:", cnt)
+
+
 def main():
     out, pts, n = [], 0, 0
     for name, unit, fn, lvl, src, rule in IND:
@@ -83,6 +165,10 @@ def main():
     except Exception as e:
         print("Verlauf nicht gespeichert:", e)
     print("Stress-Score:", score, f"({n} von {len(IND)} Indikatoren)")
+    try:
+        indices()
+    except Exception as e:
+        print("Weltmärkte fehlgeschlagen:", e)
 
 
 if __name__ == "__main__":
