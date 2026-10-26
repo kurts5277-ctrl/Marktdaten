@@ -1,0 +1,139 @@
+{
+ "score": 40.0,
+ "ueber_50_tage_pct": 50.0,
+ "ueber_200_tage_pct": 60.0,
+ "neue_trendsignale": 1,
+ "trendbrueche": 0,
+ "ueberkauft_pct": 25.0,
+ "ueberverkauft_pct": 7.5,
+ "aktien_bewertet": 40,
+ "verlauf": [
+  {
+   "date": "2026-09-14",
+   "score": 25.0
+  },
+  {
+   "date": "2026-09-15",
+   "score": 32.5
+  },
+  {
+   "date": "2026-09-16",
+   "score": 35.0
+  },
+  {
+   "date": "2026-09-17",
+   "score": 37.5
+  },
+  {
+   "date": "2026-09-18",
+   "score": 25.0
+  },
+  {
+   "date": "2026-09-21",
+   "score": 35.0
+  },
+  {
+   "date": "2026-09-22",
+   "score": 32.5
+  },
+  {
+   "date": "2026-09-23",
+   "score": 32.5
+  },
+  {
+   "date": "2026-09-24",
+   "score": 32.5
+  },
+  {
+   "date": "2026-09-25",
+   "score": 32.5
+  },
+  {
+   "date": "2026-09-28",
+   "score": 37.5
+  },
+  {
+   "date": "2026-09-29",
+   "score": 35.0
+  },
+  {
+   "date": "2026-09-30",
+   "score": 27.5
+  },
+  {
+   "date": "2026-10-01",
+   "score": 17.5
+  },
+  {
+   "date": "2026-10-02",
+   "score": 27.5
+  },
+  {
+   "date": "2026-10-05",
+   "score": 22.5
+  },
+  {
+   "date": "2026-10-06",
+   "score": 32.5
+  },
+  {
+   "date": "2026-10-07",
+   "score": 27.5
+  },
+  {
+   "date": "2026-10-08",
+   "score": 25.0
+  },
+  {
+   "date": "2026-10-09",
+   "score": 32.5
+  },
+  {
+   "date": "2026-10-12",
+   "score": 35.0
+  },
+  {
+   "date": "2026-10-13",
+   "score": 37.5
+  },
+  {
+   "date": "2026-10-14",
+   "score": 40.0
+  },
+  {
+   "date": "2026-10-15",
+   "score": 37.5
+  },
+  {
+   "date": "2026-10-16",
+   "score": 42.5
+  },
+  {
+   "date": "2026-10-19",
+   "score": 35.0
+  },
+  {
+   "date": "2026-10-20",
+   "score": 35.0
+  },
+  {
+   "date": "2026-10-21",
+   "score": 42.5
+  },
+  {
+   "date": "2026-10-22",
+   "score": 37.5
+  },
+  {
+   "date": "2026-10-23",
+   "score": 40.0
+  }
+ ],
+ "universum": "DAX 40",
+ "stand_kurse": "2026-10-23",
+ "erzeugt_utc": "2026-10-26 06:29",
+ "angefragt": 40,
+ "geladen": 40,
+ "fehlend": [],
+ "definition": "Trendsignal = Kurs > 50-Tage-Linie und 50-Tage-Linie > 200-Tage-Linie. Score = Anteil der Aktien mit Trendsignal in %. Überkauft = RSI(14) > 70, überverkauft = RSI(14) < 30."
+}

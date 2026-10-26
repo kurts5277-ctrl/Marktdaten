@@ -1,0 +1,17 @@
+{
+ "markets": [
+  {
+   "id": "sp500",
+   "name": "S&P 500"
+  },
+  {
+   "id": "dax",
+   "name": "DAX 40"
+  }
+ ],
+ "fehler": [
+  "Nasdaq 100: Liste fehlgeschlagen (keine passende Tabelle (gefunden: ))",
+  "Dow Jones: Liste fehlgeschlagen (keine passende Tabelle (gefunden: ))"
+ ],
+ "erzeugt_utc": "2026-10-26 06:29"
+}

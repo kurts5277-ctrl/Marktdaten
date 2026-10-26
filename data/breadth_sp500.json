@@ -1,6 +1,7 @@
 {
  "score": 37.8,
  "ueber_50_tage_pct": 59.0,
+ "ueber_200_tage_pct": 58.6,
  "neue_trendsignale": 6,
  "trendbrueche": 12,
  "ueberkauft_pct": 10.0,
@@ -130,7 +131,7 @@
  ],
  "universum": "S&P 500",
  "stand_kurse": "2026-10-23",
- "erzeugt_utc": "2026-10-25 15:53",
+ "erzeugt_utc": "2026-10-26 06:29",
  "angefragt": 503,
  "geladen": 503,
  "fehlend": [],
