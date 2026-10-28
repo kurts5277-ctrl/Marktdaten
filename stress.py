@@ -99,7 +99,9 @@ def index_stats(c, bp=False):
     l = (-d.clip(upper=0)).ewm(alpha=1 / 14, adjust=False).mean().iloc[-1]
     rsi = 100 - 100 / (1 + g / l) if l else 100.0
     ch = lambda a, b: (a - b) * 100 if bp else (a / b - 1) * 100
-    return {"kurs": round(last, 2), "tag": round(ch(last, prev), 2), "trend": trend,
+    dup = abs(last - prev) < 1e-9
+    return {"kurs": round(last, 2), "tag": None if dup else round(ch(last, prev), 2),
+            "warn": "Kurs identisch zum Vortag, Tagesänderung nicht verlässlich" if dup else None, "trend": trend,
             "abstand_hoch_pct": round((last / float(c.tail(252).max()) - 1) * 100, 1),
             "rsi": round(float(rsi), 0),
             "m1": round(ch(last, float(c.iloc[-22])), 1) if len(c) > 22 else None,
@@ -135,6 +137,111 @@ def indices():
                "erzeugt_utc": dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M")},
               open("data/indices.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("Indizes:", cnt)
+    return {"cnt": cnt, "rows": {r["symbol"]: r for g in out for r in g["items"]}}
+
+
+
+ETFS = [("VWCE", "Vanguard FTSE All-World UCITS ETF (Acc)"), ("IQGA", "Invesco Global Enhanced Equity UCITS ETF"),
+        ("JPGL", "JPMorgan Global Equity Multi-Factor UCITS ETF"), ("DFEN", "VanEck Defense UCITS ETF"),
+        ("QDVE", "iShares S&P 500 Information Technology Sector UCITS ETF"),
+        ("LDGA", "L&G Quality Dividends"), ("L0CK", "iShares Digital Security UCITS ETF")]
+
+
+def etfs():
+    rows = []
+    for k, name in ETFS:
+        row = {"kuerzel": k, "name": name}
+        for sf in (".DE", ".L", ".MI", ".AS", ""):
+            try:
+                c = yahoo(k + sf)
+                if len(c) > 60:
+                    row.update(index_stats(c))
+                    row["symbol"] = k + sf
+                    break
+            except Exception:
+                pass
+        if "kurs" not in row:
+            row["fehler"] = "Kürzel bei Yahoo nicht gefunden"
+            print("FEHLER ETF", k)
+        rows.append(row)
+    json.dump({"etfs": rows, "erzeugt_utc": dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M")},
+              open("data/etfs.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+
+
+def push(text):
+    t = (os.environ.get("NTFY_TOPIC") or "").strip()
+    if not t:
+        return
+    try:
+        requests.post("https://ntfy.sh/" + t, data=text.encode("utf-8"), headers={"Title": "Boersenampel"}, timeout=15)
+    except Exception as e:
+        print("Push fehlgeschlagen:", type(e).__name__)
+
+
+NAMEN = ["Gefahr: breiter Abverkauf", "Vorsicht", "Gemischtes Bild", "Überwiegend freundlich", "Rückenwind"]
+
+
+def gesamt(stress_score, ix):
+    try:
+        b = json.load(open("data/breadth_sp500.json", encoding="utf-8"))["score"]
+    except Exception:
+        b = None
+    z = ix["cnt"] if ix else {"auf": 0, "gemischt": 0, "ab": 0}
+    tot = sum(z.values())
+    w = (z["auf"] + 0.5 * z["gemischt"]) / tot * 100 if tot else None
+    ruhe = None if stress_score is None else 100 - stress_score
+    teile = []
+
+    def teil(name, v, worte):
+        if v is None:
+            return None
+        i = 0 if v < 40 else (1 if v < 60 else 2)
+        teile.append({"name": name, "urteil": worte[i], "farbe": ["rot", "gelb", "gruen"][i], "wert": round(v)})
+        return v
+
+    vals = [x for x in (teil("Breite S&P 500", b, ["schwach", "gemischt", "breit"]),
+                        teil("Stress", ruhe, ["unter Druck", "erhöht", "ruhig"]),
+                        teil("Weltmärkte", w, ["schwach", "gemischt", "stark"])) if x is not None]
+    if not vals:
+        return
+    sc = sum(vals) / len(vals)
+    stufe = 0 if sc < 20 else 1 if sc < 40 else 2 if sc < 60 else 3 if sc < 80 else 4
+    ein = []
+    if stress_score is not None:
+        ein.append("Kredit- und Angstmärkte sind " + ("ruhig." if stress_score < 33 else "angespannt." if stress_score < 66 else "stark unter Druck."))
+    if b is not None:
+        ein.append("Im S&P 500 läuft " + ("nur eine Minderheit" if b < 40 else "etwa die Hälfte" if b < 60 else "die Mehrheit") + f" der Aktien im Aufwärtstrend ({b:.0f} %).")
+    if tot:
+        ein.append(f"{z['auf']} von {tot} wichtigen Aktienindizes weltweit sind im Aufwärtstrend, {z['ab']} im Abwärtstrend.")
+    rows = ix["rows"] if ix else {}
+    sox, ndx = rows.get("^SOX", {}).get("abstand_hoch_pct"), rows.get("^NDX", {}).get("abstand_hoch_pct")
+    tech_schwach = (sox is not None and sox < -15) or (ndx is not None and ndx < -10)
+    if sox is not None and ndx is not None:
+        ein.append(f"Halbleiter liegen {abs(sox):.0f} % und der Nasdaq 100 {abs(ndx):.0f} % unter ihrem Hoch.")
+    if stress_score is not None and stress_score < 33 and b is not None and b < 40:
+        ein.append("Meine Einordnung: Die Teile widersprechen sich. Der Druck sitzt in einzelnen Bereichen, nicht im ganzen Markt." + (" Er kommt vor allem aus Tech und Chips." if tech_schwach else ""))
+    if tech_schwach:
+        ein.append("Das trifft deinen S&P-Tech-ETF (iShares S&P 500 Information Technology) direkt, deinen Welt-ETF (Vanguard FTSE All-World) nur teilweise, weil Tech dort nur ein Teil ist.")
+    else:
+        ein.append("Dein Welt-ETF (Vanguard FTSE All-World) folgt im Wesentlichen diesem Gesamtbild.")
+    ein.append("Das ist ein Lagebild, kein Kauf- oder Verkaufssignal. Dein 20-Jahre-Sparplan hängt nicht an dieser Ampel.")
+    stress_stufe = None if stress_score is None else (0 if stress_score < 33 else 1 if stress_score < 66 else 2)
+    prev = None
+    try:
+        prev = json.load(open("data/gesamt.json", encoding="utf-8"))
+    except Exception:
+        pass
+    out = {"stufe": stufe, "name": NAMEN[stufe], "score": round(sc, 1), "teile": teile, "einordnung": ein,
+           "stress_stufe": stress_stufe, "erzeugt_utc": dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M")}
+    json.dump(out, open("data/gesamt.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    if prev and prev.get("stufe") != stufe:
+        push(f"Gesamtbild: {prev.get('name')} → {NAMEN[stufe]} ({sc:.0f} von 100)")
+    sn = ["ruhig", "erhöht", "hoch"]
+    if prev and prev.get("stress_stufe") is not None and stress_stufe is not None and prev["stress_stufe"] != stress_stufe:
+        push(f"Markt-Stress: {sn[prev['stress_stufe']]} → {sn[stress_stufe]} ({stress_score:.0f} von 100)")
+    if not os.path.exists("data/ntfy_ok.txt") and (os.environ.get("NTFY_TOPIC") or "").strip():
+        push("Verbindung steht. Du bekommst eine Nachricht, wenn Gesamtbild oder Markt-Stress die Stufe wechseln.")
+        open("data/ntfy_ok.txt", "w").write("ok")
 
 
 def main():
@@ -165,10 +272,19 @@ def main():
     except Exception as e:
         print("Verlauf nicht gespeichert:", e)
     print("Stress-Score:", score, f"({n} von {len(IND)} Indikatoren)")
+    ix = None
     try:
-        indices()
+        ix = indices()
     except Exception as e:
         print("Weltmärkte fehlgeschlagen:", e)
+    try:
+        etfs()
+    except Exception as e:
+        print("ETFs fehlgeschlagen:", e)
+    try:
+        gesamt(score, ix)
+    except Exception as e:
+        print("Gesamtbild fehlgeschlagen:", e)
 
 
 if __name__ == "__main__":
