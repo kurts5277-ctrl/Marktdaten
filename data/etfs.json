@@ -1,0 +1,103 @@
+{
+ "etfs": [
+  {
+   "kuerzel": "VWCE",
+   "name": "Vanguard FTSE All-World UCITS ETF (Acc)",
+   "kurs": 170.0,
+   "tag": 0.41,
+   "warn": null,
+   "trend": "auf",
+   "abstand_hoch_pct": -2.1,
+   "rsi": 49.0,
+   "m1": 0.2,
+   "datum": "2026-10-26",
+   "einheit": "%",
+   "symbol": "VWCE.DE"
+  },
+  {
+   "kuerzel": "IQGA",
+   "name": "Invesco Global Enhanced Equity UCITS ETF",
+   "kurs": 6.01,
+   "tag": 0.79,
+   "warn": null,
+   "trend": "auf",
+   "abstand_hoch_pct": -1.5,
+   "rsi": 52.0,
+   "m1": 0.9,
+   "datum": "2026-10-26",
+   "einheit": "%",
+   "symbol": "IQGA.DE"
+  },
+  {
+   "kuerzel": "JPGL",
+   "name": "JPMorgan Global Equity Multi-Factor UCITS ETF",
+   "kurs": 47.17,
+   "tag": 0.21,
+   "warn": null,
+   "trend": "auf",
+   "abstand_hoch_pct": 0.0,
+   "rsi": 74.0,
+   "m1": 4.4,
+   "datum": "2026-10-26",
+   "einheit": "%",
+   "symbol": "JPGL.DE"
+  },
+  {
+   "kuerzel": "DFEN",
+   "name": "VanEck Defense UCITS ETF",
+   "kurs": 51.9,
+   "tag": 2.39,
+   "warn": null,
+   "trend": "ab",
+   "abstand_hoch_pct": -19.0,
+   "rsi": 53.0,
+   "m1": -0.3,
+   "datum": "2026-10-26",
+   "einheit": "%",
+   "symbol": "DFEN.DE"
+  },
+  {
+   "kuerzel": "QDVE",
+   "name": "iShares S&P 500 Information Technology Sector UCITS ETF",
+   "kurs": 46.12,
+   "tag": 1.07,
+   "warn": null,
+   "trend": "auf",
+   "abstand_hoch_pct": -6.5,
+   "rsi": 46.0,
+   "m1": -2.1,
+   "datum": "2026-10-26",
+   "einheit": "%",
+   "symbol": "QDVE.DE"
+  },
+  {
+   "kuerzel": "LDGA",
+   "name": "L&G Quality Dividends",
+   "kurs": 10.72,
+   "tag": 1.21,
+   "warn": null,
+   "trend": "auf",
+   "abstand_hoch_pct": 0.0,
+   "rsi": 64.0,
+   "m1": 3.2,
+   "datum": "2026-10-26",
+   "einheit": "%",
+   "symbol": "LDGA.DE"
+  },
+  {
+   "kuerzel": "L0CK",
+   "name": "iShares Digital Security UCITS ETF",
+   "kurs": 12.48,
+   "tag": 2.41,
+   "warn": null,
+   "trend": "auf",
+   "abstand_hoch_pct": 0.0,
+   "rsi": 68.0,
+   "m1": 8.8,
+   "datum": "2026-10-26",
+   "einheit": "%",
+   "symbol": "L0CK.DE"
+  }
+ ],
+ "erzeugt_utc": "2026-10-28 03:20"
+}
