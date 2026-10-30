@@ -1,35 +1,36 @@
 {
- "stufe": 3,
- "name": "Überwiegend freundlich",
- "score": 65.7,
+ "stufe": 2,
+ "name": "Gemischtes Bild",
+ "score": 58.6,
  "teile": [
   {
    "name": "Breite S&P 500",
-   "urteil": "gemischt",
-   "farbe": "gelb",
-   "wert": 40
+   "urteil": "schwach",
+   "farbe": "rot",
+   "wert": 36
   },
   {
    "name": "Stress",
    "urteil": "ruhig",
    "farbe": "gruen",
-   "wert": 93
+   "wert": 86
   },
   {
    "name": "Weltmärkte",
-   "urteil": "stark",
-   "farbe": "gruen",
-   "wert": 64
+   "urteil": "gemischt",
+   "farbe": "gelb",
+   "wert": 54
   }
  ],
  "einordnung": [
   "Kredit- und Angstmärkte sind ruhig.",
-  "Im S&P 500 läuft etwa die Hälfte der Aktien im Aufwärtstrend (40 %).",
-  "6 von 14 wichtigen Aktienindizes weltweit sind im Aufwärtstrend, 2 im Abwärtstrend.",
-  "Halbleiter liegen 21 % und der Nasdaq 100 6 % unter ihrem Hoch.",
+  "Im S&P 500 läuft nur eine Minderheit der Aktien im Aufwärtstrend (36 %).",
+  "3 von 14 wichtigen Aktienindizes weltweit sind im Aufwärtstrend, 2 im Abwärtstrend.",
+  "Halbleiter liegen 27 % und der Nasdaq 100 9 % unter ihrem Hoch.",
+  "Meine Einordnung: Die Teile widersprechen sich. Der Druck sitzt in einzelnen Bereichen, nicht im ganzen Markt. Er kommt vor allem aus Tech und Chips.",
   "Das trifft deinen S&P-Tech-ETF (iShares S&P 500 Information Technology) direkt, deinen Welt-ETF (Vanguard FTSE All-World) nur teilweise, weil Tech dort nur ein Teil ist.",
   "Das ist ein Lagebild, kein Kauf- oder Verkaufssignal. Dein 20-Jahre-Sparplan hängt nicht an dieser Ampel."
  ],
  "stress_stufe": 0,
- "erzeugt_utc": "2026-10-29 23:12"
+ "erzeugt_utc": "2026-10-30 23:07"
 }
