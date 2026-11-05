@@ -1,17 +1,13 @@
 {
- "score": 50.0,
- "ueber_50_tage_pct": 76.7,
- "ueber_200_tage_pct": 76.7,
- "neue_trendsignale": 4,
- "trendbrueche": 0,
- "ueberkauft_pct": 23.3,
- "ueberverkauft_pct": 3.3,
+ "score": 43.3,
+ "ueber_50_tage_pct": 70.0,
+ "ueber_200_tage_pct": 70.0,
+ "neue_trendsignale": 0,
+ "trendbrueche": 2,
+ "ueberkauft_pct": 3.3,
+ "ueberverkauft_pct": 10.0,
  "aktien_bewertet": 30,
  "verlauf": [
-  {
-   "date": "2026-09-24",
-   "score": 33.3
-  },
   {
    "date": "2026-09-25",
    "score": 33.3
@@ -127,11 +123,15 @@
   {
    "date": "2026-11-04",
    "score": 50.0
+  },
+  {
+   "date": "2026-11-05",
+   "score": 43.3
   }
  ],
  "universum": "Dow Jones",
- "stand_kurse": "2026-11-04",
- "erzeugt_utc": "2026-11-04 23:15",
+ "stand_kurse": "2026-11-05",
+ "erzeugt_utc": "2026-11-05 23:16",
  "angefragt": 30,
  "geladen": 30,
  "fehlend": [],
