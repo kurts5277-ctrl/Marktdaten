@@ -1,17 +1,13 @@
 {
- "score": 57.5,
- "ueber_50_tage_pct": 75.0,
+ "score": 52.5,
+ "ueber_50_tage_pct": 65.0,
  "ueber_200_tage_pct": 75.0,
  "neue_trendsignale": 0,
- "trendbrueche": 1,
- "ueberkauft_pct": 32.5,
+ "trendbrueche": 2,
+ "ueberkauft_pct": 15.0,
  "ueberverkauft_pct": 2.5,
  "aktien_bewertet": 40,
  "verlauf": [
-  {
-   "date": "2026-09-25",
-   "score": 32.5
-  },
   {
    "date": "2026-09-28",
    "score": 37.5
@@ -127,11 +123,15 @@
   {
    "date": "2026-11-05",
    "score": 57.5
+  },
+  {
+   "date": "2026-11-06",
+   "score": 52.5
   }
  ],
  "universum": "DAX 40",
- "stand_kurse": "2026-11-05",
- "erzeugt_utc": "2026-11-06 23:13",
+ "stand_kurse": "2026-11-06",
+ "erzeugt_utc": "2026-11-09 23:14",
  "angefragt": 40,
  "geladen": 40,
  "fehlend": [],
