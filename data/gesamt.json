@@ -1,13 +1,13 @@
 {
  "stufe": 3,
  "name": "Überwiegend freundlich",
- "score": 62.8,
+ "score": 62.9,
  "teile": [
   {
    "name": "Breite S&P 500",
    "urteil": "schwach",
    "farbe": "rot",
-   "wert": 38
+   "wert": 39
   },
   {
    "name": "Stress",
@@ -24,13 +24,13 @@
  ],
  "einordnung": [
   "Kredit- und Angstmärkte sind ruhig.",
-  "Im S&P 500 läuft nur eine Minderheit der Aktien im Aufwärtstrend (38 %).",
+  "Im S&P 500 läuft nur eine Minderheit der Aktien im Aufwärtstrend (39 %).",
   "5 von 14 wichtigen Aktienindizes weltweit sind im Aufwärtstrend, 1 im Abwärtstrend.",
-  "Halbleiter liegen 31 % und der Nasdaq 100 11 % unter ihrem Hoch.",
+  "Halbleiter liegen 32 % und der Nasdaq 100 11 % unter ihrem Hoch.",
   "Meine Einordnung: Die Teile widersprechen sich. Der Druck sitzt in einzelnen Bereichen, nicht im ganzen Markt. Er kommt vor allem aus Tech und Chips.",
   "Das trifft deinen S&P-Tech-ETF (iShares S&P 500 Information Technology) direkt, deinen Welt-ETF (Vanguard FTSE All-World) nur teilweise, weil Tech dort nur ein Teil ist.",
   "Das ist ein Lagebild, kein Kauf- oder Verkaufssignal. Dein 20-Jahre-Sparplan hängt nicht an dieser Ampel."
  ],
  "stress_stufe": 0,
- "erzeugt_utc": "2026-11-09 23:15"
+ "erzeugt_utc": "2026-11-10 23:13"
 }
