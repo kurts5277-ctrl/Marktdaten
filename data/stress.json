@@ -6,18 +6,18 @@
    "einheit": "Punkte",
    "quelle": "Yahoo",
    "regel": "unter 20 ruhig, 20–30 erhöht, ab 30 Stress",
-   "wert": 19.46,
+   "wert": 17.49,
    "stufe": 0,
-   "datum": "2026-11-10"
+   "datum": "2026-11-11"
   },
   {
    "name": "VIX / VIX3M (Kurvenform)",
    "einheit": "Verhältnis",
    "quelle": "Yahoo",
    "regel": "ab 1,0 = Backwardation (akuter Stress)",
-   "wert": 0.94,
+   "wert": 0.91,
    "stufe": 1,
-   "datum": "2026-11-10"
+   "datum": "2026-11-11"
   },
   {
    "name": "Kreditspread Hochzins (HY)",
@@ -60,12 +60,12 @@
    "einheit": "%",
    "quelle": "Yahoo",
    "regel": "bis -5 % ruhig, -5 bis -10 % erhöht, darunter Korrektur",
-   "wert": -3.81,
+   "wert": -2.55,
    "stufe": 0,
-   "datum": "2026-11-10"
+   "datum": "2026-11-11"
   }
  ],
  "geladen": 7,
  "gesamt": 7,
- "erzeugt_utc": "2026-11-10 23:13"
+ "erzeugt_utc": "2026-11-11 23:23"
 }
