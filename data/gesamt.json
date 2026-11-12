@@ -1,13 +1,13 @@
 {
  "stufe": 3,
  "name": "Überwiegend freundlich",
- "score": 65.1,
+ "score": 62.6,
  "teile": [
   {
    "name": "Breite S&P 500",
    "urteil": "gemischt",
    "farbe": "gelb",
-   "wert": 42
+   "wert": 41
   },
   {
    "name": "Stress",
@@ -19,17 +19,17 @@
    "name": "Weltmärkte",
    "urteil": "stark",
    "farbe": "gruen",
-   "wert": 68
+   "wert": 61
   }
  ],
  "einordnung": [
   "Kredit- und Angstmärkte sind ruhig.",
-  "Im S&P 500 läuft etwa die Hälfte der Aktien im Aufwärtstrend (42 %).",
-  "6 von 14 wichtigen Aktienindizes weltweit sind im Aufwärtstrend, 1 im Abwärtstrend.",
+  "Im S&P 500 läuft etwa die Hälfte der Aktien im Aufwärtstrend (41 %).",
+  "5 von 14 wichtigen Aktienindizes weltweit sind im Aufwärtstrend, 2 im Abwärtstrend.",
   "Halbleiter liegen 28 % und der Nasdaq 100 9 % unter ihrem Hoch.",
   "Das trifft deinen S&P-Tech-ETF (iShares S&P 500 Information Technology) direkt, deinen Welt-ETF (Vanguard FTSE All-World) nur teilweise, weil Tech dort nur ein Teil ist.",
   "Das ist ein Lagebild, kein Kauf- oder Verkaufssignal. Dein 20-Jahre-Sparplan hängt nicht an dieser Ampel."
  ],
  "stress_stufe": 0,
- "erzeugt_utc": "2026-11-11 23:23"
+ "erzeugt_utc": "2026-11-12 23:15"
 }
