@@ -6,45 +6,45 @@
    "einheit": "Punkte",
    "quelle": "Yahoo",
    "regel": "unter 20 ruhig, 20–30 erhöht, ab 30 Stress",
-   "wert": 24.56,
+   "wert": 28.44,
    "stufe": 1,
-   "datum": "2026-11-18"
+   "datum": "2026-11-19"
   },
   {
    "name": "VIX / VIX3M (Kurvenform)",
    "einheit": "Verhältnis",
    "quelle": "Yahoo",
    "regel": "ab 1,0 = Backwardation (akuter Stress)",
-   "wert": 1.01,
+   "wert": 1.05,
    "stufe": 2,
-   "datum": "2026-11-18"
+   "datum": "2026-11-19"
   },
   {
    "name": "Kreditspread Hochzins (HY)",
    "einheit": "%-Pkt.",
    "quelle": "FRED",
    "regel": "unter 4 ruhig, 4–6 erhöht, ab 6 Stress",
-   "wert": 3.43,
+   "wert": 3.47,
    "stufe": 0,
-   "datum": "2026-11-17"
+   "datum": "2026-11-18"
   },
   {
    "name": "Kreditspread Investment Grade",
    "einheit": "%-Pkt.",
    "quelle": "FRED",
    "regel": "unter 1,3 ruhig, 1,3–2,0 erhöht, ab 2,0 Stress",
-   "wert": 0.92,
+   "wert": 0.93,
    "stufe": 0,
-   "datum": "2026-11-17"
+   "datum": "2026-11-18"
   },
   {
    "name": "Zinskurve 10J minus 2J",
    "einheit": "%-Pkt.",
    "quelle": "FRED",
    "regel": "über 0,5 ruhig, 0–0,5 erhöht, unter 0 invers",
-   "wert": 0.27,
+   "wert": 0.28,
    "stufe": 1,
-   "datum": "2026-11-18"
+   "datum": "2026-11-19"
   },
   {
    "name": "Finanzstress-Index (St. Louis Fed)",
@@ -60,12 +60,12 @@
    "einheit": "%",
    "quelle": "Yahoo",
    "regel": "bis -5 % ruhig, -5 bis -10 % erhöht, darunter Korrektur",
-   "wert": -6.33,
+   "wert": -8.22,
    "stufe": 1,
-   "datum": "2026-11-18"
+   "datum": "2026-11-19"
   }
  ],
  "geladen": 7,
  "gesamt": 7,
- "erzeugt_utc": "2026-11-18 23:23"
+ "erzeugt_utc": "2026-11-19 23:17"
 }
