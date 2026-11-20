@@ -164,3 +164,6 @@ def main():
         sys.exit(1)
     print("OK:", [m["name"] for m in markets], "| Fehler:", errors, "| Hinweise:", notes)
 
+
+if __name__ == "__main__":
+    main()
