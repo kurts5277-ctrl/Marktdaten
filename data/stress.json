@@ -1,13 +1,13 @@
 {
- "score": 35.7,
+ "score": 50.0,
  "indikatoren": [
   {
    "name": "VIX (Angstindex)",
    "einheit": "Punkte",
    "quelle": "Yahoo",
    "regel": "unter 20 ruhig, 20–30 erhöht, ab 30 Stress",
-   "wert": 27.37,
-   "stufe": 1,
+   "wert": 35.89,
+   "stufe": 2,
    "datum": "2026-11-20"
   },
   {
@@ -15,7 +15,7 @@
    "einheit": "Verhältnis",
    "quelle": "Yahoo",
    "regel": "ab 1,0 = Backwardation (akuter Stress)",
-   "wert": 1.04,
+   "wert": 1.16,
    "stufe": 2,
    "datum": "2026-11-20"
   },
@@ -42,9 +42,9 @@
    "einheit": "%-Pkt.",
    "quelle": "FRED",
    "regel": "über 0,5 ruhig, 0–0,5 erhöht, unter 0 invers",
-   "wert": 0.28,
+   "wert": 0.29,
    "stufe": 1,
-   "datum": "2026-11-19"
+   "datum": "2026-11-20"
   },
   {
    "name": "Finanzstress-Index (St. Louis Fed)",
@@ -60,12 +60,12 @@
    "einheit": "%",
    "quelle": "Yahoo",
    "regel": "bis -5 % ruhig, -5 bis -10 % erhöht, darunter Korrektur",
-   "wert": -8.49,
-   "stufe": 1,
+   "wert": -11.62,
+   "stufe": 2,
    "datum": "2026-11-20"
   }
  ],
  "geladen": 7,
  "gesamt": 7,
- "erzeugt_utc": "2026-11-20 15:14"
+ "erzeugt_utc": "2026-11-20 23:19"
 }
