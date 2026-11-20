@@ -2,7 +2,8 @@
 import io, json, os, sys, time, datetime as dt
 import pandas as pd, requests, yfinance as yf
 
-UA = {"User-Agent": "Mozilla/5.0 (breadth)"}
+UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+      "Accept-Language": "en-US,en;q=0.9"}
 MIN_QUOTE = 0.85
 
 
@@ -11,9 +12,11 @@ def wiki(urls, names, lo, hi):
     diag = []
     for url in urls:
         try:
-            tabs = pd.read_html(io.StringIO(requests.get(url, headers=UA, timeout=30).text))
+            r = requests.get(url, headers=UA, timeout=30)
+            r.raise_for_status()
+            tabs = pd.read_html(io.StringIO(r.text))
         except Exception as e:
-            diag.append(url.rsplit("/", 1)[-1] + ": " + type(e).__name__)
+            diag.append(url.split("/")[2] + "/" + url.rstrip("/").rsplit("/", 1)[-1] + ": " + type(e).__name__)
             continue
         for t in tabs:
             for c in t.columns:
@@ -21,14 +24,16 @@ def wiki(urls, names, lo, hi):
                 if any(k in n for k in names) and lo <= len(t) <= hi:
                     return [str(x).strip() for x in t[c].dropna()]
         heads = [",".join(str(c[-1] if isinstance(c, tuple) else c)[:12] for c in list(t.columns)[:3]) + f"({len(t)})" for t in tabs[:6]]
-        diag.append(url.rsplit("/", 1)[-1] + " Tabellen: " + " | ".join(heads))
+        diag.append(url.split("/")[2] + ": keine passende Tabelle: " + " | ".join(heads))
     raise ValueError("keine passende Tabelle. " + " ; ".join(diag)[:260])
 
 
 UNIVERSES = [
     ("sp500", "S&P 500", lambda: [s.replace(".", "-") for s in wiki(
         "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies", ("symbol",), 450, 520)]),
-    ("ndx", "Nasdaq 100", lambda: wiki(["https://en.wikipedia.org/wiki/Nasdaq-100", "https://en.wikipedia.org/wiki/List_of_Nasdaq-100_companies"], ("ticker", "symbol"), 90, 110)),
+    # Wikipedia führt die Nasdaq-100-Mitglieder nicht mehr als Tabelle; stockanalysis.com liefert sie serverseitig gerendert
+    ("ndx", "Nasdaq 100", lambda: wiki(["https://stockanalysis.com/list/nasdaq-100-stocks/",
+                                        "https://en.wikipedia.org/wiki/Nasdaq-100"], ("symbol", "ticker"), 95, 110)),
     ("dax", "DAX 40", lambda: [s if "." in s else s + ".DE" for s in wiki(
         "https://en.wikipedia.org/wiki/DAX", ("ticker",), 38, 45)]),
     ("dow", "Dow Jones", lambda: wiki(["https://en.wikipedia.org/wiki/List_of_Dow_Jones_Industrial_Average_companies", "https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average"], ("symbol", "ticker"), 28, 32)),
@@ -110,7 +115,7 @@ def compute(closes):
 
 def main():
     now = dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M")
-    lists, errors = {}, []
+    lists, errors, notes = {}, [], []
     for uid, name, fn in UNIVERSES:
         try:
             lists[uid] = (name, fn())
@@ -133,8 +138,8 @@ def main():
             exp -= pd.Timedelta(days=1)
         while exp.weekday() >= 5:
             exp -= pd.Timedelta(days=1)
-        if sub.index[-1] < exp:
-            errors.append(f"{name}: Kurse enden am {sub.index[-1]:%d.%m.}, erwartet wäre {exp:%d.%m.}")
+        if sub.index[-1] < exp:  # nur ein Hinweis, der Markt wird trotzdem gezeigt
+            notes.append(f"{name}: Kurse enden am {sub.index[-1]:%d.%m.}, ein Handelstag älter als bei den anderen Märkten")
         res = compute(sub)
         if uid == "sp500":
             try:
@@ -152,13 +157,10 @@ def main():
         json.dump(res, open(f"data/breadth_{uid}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
         markets.append({"id": uid, "name": name})
         print(name, {k: v for k, v in res.items() if k in ("score", "neue_trendsignale", "trendbrueche")})
-    json.dump({"markets": markets, "fehler": errors, "erzeugt_utc": now},
+    json.dump({"markets": markets, "fehler": errors, "hinweise": notes, "erzeugt_utc": now},
               open("data/index.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if not any(m["id"] == "sp500" for m in markets):
         print("TEST NICHT BESTANDEN: S&P 500 fehlt.")
         sys.exit(1)
-    print("OK:", [m["name"] for m in markets], "| Fehler:", errors)
+    print("OK:", [m["name"] for m in markets], "| Fehler:", errors, "| Hinweise:", notes)
 
-
-if __name__ == "__main__":
-    main()
