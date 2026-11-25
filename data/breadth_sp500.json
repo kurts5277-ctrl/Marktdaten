@@ -1,11 +1,11 @@
 {
- "score": 32.0,
- "ueber_50_tage_pct": 54.4,
- "ueber_200_tage_pct": 54.8,
- "neue_trendsignale": 12,
+ "score": 32.4,
+ "ueber_50_tage_pct": 55.8,
+ "ueber_200_tage_pct": 55.6,
+ "neue_trendsignale": 14,
  "trendbrueche": 4,
- "ueberkauft_pct": 0.8,
- "ueberverkauft_pct": 1.2,
+ "ueberkauft_pct": 1.2,
+ "ueberverkauft_pct": 1.4,
  "aktien_bewertet": 500,
  "verlauf": [
   {
@@ -126,12 +126,12 @@
   },
   {
    "date": "2026-11-24",
-   "score": 32.0
+   "score": 32.4
   }
  ],
  "universum": "S&P 500",
  "stand_kurse": "2026-11-24",
- "erzeugt_utc": "2026-11-24 15:32",
+ "erzeugt_utc": "2026-11-25 04:59",
  "angefragt": 503,
  "geladen": 503,
  "fehlend": [],

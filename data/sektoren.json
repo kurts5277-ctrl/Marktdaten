@@ -3,7 +3,7 @@
   {
    "sektor": "Health Care",
    "n": 60,
-   "anteil": 63.3,
+   "anteil": 66.7,
    "vor_5_tagen": 65.0
   },
   {
@@ -21,19 +21,19 @@
   {
    "sektor": "Materials",
    "n": 24,
-   "anteil": 37.5,
+   "anteil": 33.3,
    "vor_5_tagen": 25.0
   },
   {
    "sektor": "Real Estate",
    "n": 30,
-   "anteil": 30.0,
+   "anteil": 33.3,
    "vor_5_tagen": 26.7
   },
   {
    "sektor": "Industrials",
    "n": 81,
-   "anteil": 23.5,
+   "anteil": 24.7,
    "vor_5_tagen": 27.2
   },
   {
@@ -57,7 +57,7 @@
   {
    "sektor": "Information Technology",
    "n": 76,
-   "anteil": 14.5,
+   "anteil": 13.2,
    "vor_5_tagen": 17.1
   },
   {
@@ -67,5 +67,5 @@
    "vor_5_tagen": 23.8
   }
  ],
- "erzeugt_utc": "2026-11-24 15:32"
+ "erzeugt_utc": "2026-11-25 04:59"
 }

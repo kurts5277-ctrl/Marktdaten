@@ -1,6 +1,6 @@
 {
  "score": 33.3,
- "ueber_50_tage_pct": 46.7,
+ "ueber_50_tage_pct": 50.0,
  "ueber_200_tage_pct": 56.7,
  "neue_trendsignale": 0,
  "trendbrueche": 1,
@@ -131,7 +131,7 @@
  ],
  "universum": "Dow Jones",
  "stand_kurse": "2026-11-24",
- "erzeugt_utc": "2026-11-24 15:32",
+ "erzeugt_utc": "2026-11-25 04:59",
  "angefragt": 30,
  "geladen": 30,
  "fehlend": [],

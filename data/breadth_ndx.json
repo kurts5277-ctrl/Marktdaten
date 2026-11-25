@@ -1,10 +1,10 @@
 {
- "score": 25.3,
- "ueber_50_tage_pct": 41.4,
- "ueber_200_tage_pct": 43.4,
- "neue_trendsignale": 4,
+ "score": 26.3,
+ "ueber_50_tage_pct": 42.4,
+ "ueber_200_tage_pct": 45.5,
+ "neue_trendsignale": 5,
  "trendbrueche": 2,
- "ueberkauft_pct": 1.0,
+ "ueberkauft_pct": 2.0,
  "ueberverkauft_pct": 2.0,
  "aktien_bewertet": 99,
  "verlauf": [
@@ -126,12 +126,12 @@
   },
   {
    "date": "2026-11-24",
-   "score": 25.3
+   "score": 26.3
   }
  ],
  "universum": "Nasdaq 100",
  "stand_kurse": "2026-11-24",
- "erzeugt_utc": "2026-11-24 15:32",
+ "erzeugt_utc": "2026-11-25 04:59",
  "angefragt": 101,
  "geladen": 101,
  "fehlend": [],
