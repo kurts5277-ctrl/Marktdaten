@@ -3,25 +3,25 @@
   {
    "sektor": "Health Care",
    "n": 60,
-   "anteil": 66.7,
-   "vor_5_tagen": 65.0
+   "anteil": 65.0,
+   "vor_5_tagen": 58.3
   },
   {
    "sektor": "Consumer Staples",
    "n": 32,
    "anteil": 53.1,
-   "vor_5_tagen": 46.9
+   "vor_5_tagen": 53.1
   },
   {
    "sektor": "Financials",
    "n": 76,
-   "anteil": 48.7,
-   "vor_5_tagen": 51.3
+   "anteil": 51.3,
+   "vor_5_tagen": 50.0
   },
   {
    "sektor": "Materials",
    "n": 24,
-   "anteil": 33.3,
+   "anteil": 37.5,
    "vor_5_tagen": 25.0
   },
   {
@@ -33,20 +33,26 @@
   {
    "sektor": "Industrials",
    "n": 81,
-   "anteil": 24.7,
-   "vor_5_tagen": 27.2
-  },
-  {
-   "sektor": "Communication Services",
-   "n": 22,
-   "anteil": 22.7,
-   "vor_5_tagen": 22.7
+   "anteil": 27.2,
+   "vor_5_tagen": 29.6
   },
   {
    "sektor": "Consumer Discretionary",
    "n": 47,
-   "anteil": 21.3,
-   "vor_5_tagen": 25.5
+   "anteil": 23.4,
+   "vor_5_tagen": 23.4
+  },
+  {
+   "sektor": "Communication Services",
+   "n": 22,
+   "anteil": 18.2,
+   "vor_5_tagen": 22.7
+  },
+  {
+   "sektor": "Information Technology",
+   "n": 75,
+   "anteil": 17.3,
+   "vor_5_tagen": 16.0
   },
   {
    "sektor": "Utilities",
@@ -55,17 +61,11 @@
    "vor_5_tagen": 16.1
   },
   {
-   "sektor": "Information Technology",
-   "n": 76,
-   "anteil": 13.2,
-   "vor_5_tagen": 17.1
-  },
-  {
    "sektor": "Energy",
    "n": 21,
    "anteil": 0.0,
-   "vor_5_tagen": 23.8
+   "vor_5_tagen": 4.8
   }
  ],
- "erzeugt_utc": "2026-11-25 04:59"
+ "erzeugt_utc": "2026-11-26 04:18"
 }
