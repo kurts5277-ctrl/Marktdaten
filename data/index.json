@@ -19,7 +19,10 @@
  ],
  "fehler": [],
  "hinweise": [
-  "DAX 40: Kurse enden am 24.11., ein Handelstag älter als bei den anderen Märkten"
+  "S&P 500: Kurse enden am 25.11., ein Handelstag älter als bei den anderen Märkten",
+  "Nasdaq 100: Kurse enden am 25.11., ein Handelstag älter als bei den anderen Märkten",
+  "DAX 40: Kurse enden am 25.11., ein Handelstag älter als bei den anderen Märkten",
+  "Dow Jones: Kurse enden am 25.11., ein Handelstag älter als bei den anderen Märkten"
  ],
- "erzeugt_utc": "2026-11-26 04:18"
+ "erzeugt_utc": "2026-11-27 04:27"
 }

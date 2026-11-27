@@ -6,9 +6,9 @@
    "einheit": "Punkte",
    "quelle": "Yahoo",
    "regel": "unter 20 ruhig, 20–30 erhöht, ab 30 Stress",
-   "wert": 28.29,
+   "wert": 26.8,
    "stufe": 1,
-   "datum": "2026-11-25"
+   "datum": "2026-11-26"
   },
   {
    "name": "VIX / VIX3M (Kurvenform)",
@@ -67,5 +67,5 @@
  ],
  "geladen": 7,
  "gesamt": 7,
- "erzeugt_utc": "2026-11-26 04:19"
+ "erzeugt_utc": "2026-11-27 04:28"
 }

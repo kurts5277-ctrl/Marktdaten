@@ -50,9 +50,9 @@
   },
   {
    "sektor": "Information Technology",
-   "n": 75,
-   "anteil": 17.3,
-   "vor_5_tagen": 16.0
+   "n": 76,
+   "anteil": 17.1,
+   "vor_5_tagen": 15.8
   },
   {
    "sektor": "Utilities",
@@ -67,5 +67,5 @@
    "vor_5_tagen": 4.8
   }
  ],
- "erzeugt_utc": "2026-11-26 04:18"
+ "erzeugt_utc": "2026-11-27 04:27"
 }
